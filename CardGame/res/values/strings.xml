@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">CardGame</string>
+    <string name="loading_text">The game is loading..</string>
+    <string name="LobbyTitle">Lobby</string>
+    <string name="LobbyInvite">Invite checked players</string>
+    <string name="WaitingForPlayersTitle">Creating game</string>
+    <string name="WaitingForPlayersAccepted">Players who accepted</string>
+    <string name="WaitingForPlayersWaiting">Waiting for</string>
+    <string name="Ok">Ok</string>
+    <string name="PlayerDisconnectedTitle">Player disconnected:</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Disconnect">Disconnect</string>
+    <string name="LoadingTitle">Loading game</string>
+    <string name="InvitationTitle">Invitation</string>
+    <string name="Accept">Accept</string>
+    <string name="Reject">Reject</string>
+    <string name="InvitationText" formatted="false">You have received an invitation from %s for playing %s</string>
+</resources>

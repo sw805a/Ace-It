@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/loadingTitle"
+		android:layout_alignParentTop="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/LoadingTitle"
+		android:textSize="30dip"
+		android:textStyle="bold"
+		android:paddingBottom="20dip"
+	/>
+</RelativeLayout>

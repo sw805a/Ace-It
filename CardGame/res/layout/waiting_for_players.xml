@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/waitingForPlayersTitle"
+		android:layout_alignParentTop="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/WaitingForPlayersTitle"
+		android:textSize="30dip"
+		android:textStyle="bold"
+		android:paddingBottom="20dip"
+	/>
+
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/waitingForPlayersWaiting"
+		android:layout_below="@id/waitingForPlayersTitle"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/WaitingForPlayersWaiting"
+		android:textSize="20dip"
+		android:paddingBottom="12dip"
+	/>
+
+    <ListView
+    	android:id="@+id/playerListWaiting"
+		android:layout_below="@id/waitingForPlayersWaiting"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+		android:paddingBottom="20dip"
+   	/>
+
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/waitingForPlayersAccepted"
+		android:layout_below="@id/playerListWaiting"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/WaitingForPlayersAccepted"
+		android:textSize="20dip"
+		android:paddingBottom="12dip"
+	/>
+
+    <ListView
+    	android:id="@+id/playerListAccepted"
+		android:layout_below="@id/waitingForPlayersAccepted"
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+		android:paddingBottom="20dip"
+   	/>
+
+
+	<Button
+    	android:gravity="center_horizontal"
+		android:id="@+id/waitingForPlayersCancel"
+		android:layout_alignParentBottom="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/Disconnect"
+		android:textSize="20dip"
+		android:textStyle="bold"
+	/>
+</RelativeLayout>

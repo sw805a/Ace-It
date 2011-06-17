@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/invitationTitle"
+		android:layout_alignParentTop="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/InvitationTitle"
+		android:textSize="30dip"
+		android:textStyle="bold"
+		android:paddingBottom="20dip"
+	/>
+	<TextView
+    	android:gravity="center_horizontal"
+		android:id="@+id/invitationText"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_below="@id/invitationTitle"
+		android:textSize="20dip"
+	/>
+	<Button
+    	android:gravity="center_horizontal"
+		android:id="@+id/invitationAccept"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_height="wrap_content"
+		android:layout_width="160dip"
+		android:text="@string/Accept"
+		android:textSize="20dip"
+		android:textStyle="bold"
+	/>
+	<Button
+    	android:gravity="center_horizontal"
+		android:id="@+id/invitationAccept"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_height="wrap_content"
+		android:layout_width="160dip"
+		android:text="@string/Reject"
+		android:textSize="20dip"
+		
+	/>
+</RelativeLayout>

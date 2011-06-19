@@ -3,11 +3,9 @@ package sw805a.cardgame.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-
+import java.util.Random;
 import sw805a.cardgame.game.models.Board;
 import sw805a.cardgame.game.models.Card;
-import sw805a.cardgame.game.models.Card.Suit;
-import sw805a.cardgame.game.models.Card.Value;
 import sw805a.cardgame.game.models.GameState;
 import sw805a.cardgame.game.models.Hand;
 import sw805a.cardgame.game.models.Move;
@@ -22,14 +20,7 @@ import sw805a.cardgame.ui.decorators.PlayerDecorator;
 import sw805a.cardgame.ui.decorators.HandDecorator.Sorting;
 
 public class RuleEngineOlsen implements IRuleEngine {
-	private static RuleEngineOlsen _instance = null;
-	public static RuleEngineOlsen getInstance() {
-		if (_instance == null) {
-			_instance = new RuleEngineOlsen();
-		}
-		return _instance;
-	}
-	private RuleEngineOlsen(){};
+
 	
 	private GameState _gameState = new GameState();
 	private Player _turn;
@@ -49,12 +40,14 @@ public class RuleEngineOlsen implements IRuleEngine {
 	 */
 	
 	private void initializePiles() {
-		// TODO: Load from XML
-		Pile p = new Pile();
+		Pile putPile = new Pile();
+		Pile getPile = new Pile();
 		ArrayList<Pile> piles = new ArrayList<Pile>();
-		piles.add(p);
+		piles.add(putPile);
+		piles.add(getPile);
 		getGameState().getBoard().setPiles(piles);
 	}
+	
 	private void initializeDeck() {
 		//  TODO: Load from XML
 		HashMap<Integer,Card> deck = new HashMap<Integer,Card>();
@@ -70,14 +63,10 @@ public class RuleEngineOlsen implements IRuleEngine {
 				deck.put(id++,card);
 			}
 		}
-		for (int i = id; i<id+3;i++) {
-			Card joker = new Card(Card.Suit.SPECIAL, Card.Value.JOKER);
-			joker.setId(i);
-			deck.put(i, joker);
-		}
-		
+				
 		getGameState().getBoard().setDeck(deck);
 	}
+	
 	public void initializeGame(Player myPlayer, ArrayList<Player> players) {
 		_myPlayer = myPlayer;
 		getGameState().getBoard().setPlayers(players);
@@ -86,32 +75,42 @@ public class RuleEngineOlsen implements IRuleEngine {
 		initializePiles();
 		
 		
-		// TODO: Load from xml
-		/**
-		 * R�vhul specific
-		 */
 		Board board = getGameState().getBoard();
 		int playerCount = board.getPlayerCount();
 		
 		ArrayList<Card> deck = board.getDeckAsArray();
 		Collections.shuffle(deck);
 		
-		int i = 0;
-		for (Card card : deck) {
-			board.getPlayer(i++ % playerCount).getHand().addCard(null, card);
+		for(int j = 0; j < 7; j++){
+			for(int i = 0; i < playerCount; i++){
+				board.getPlayer(i).getHand().addCard(null, deck.iterator().next());
+				deck.iterator().remove(); // pop
+			}
 		}
+
+		board.getPile(1).setCards(deck);
 		
 		calcStarter();
 	}
+	
 	private void initializeBoardDecorator() {
 		// TODO: Load from xml
 		BoardDecorator boardDeco = new BoardDecorator();
-		PileDecorator pileDeco = new PileDecorator();
-		boardDeco.addPileDecorator(pileDeco);
+		PileDecorator putPileDeco = new PileDecorator();
+		PileDecorator takePileDeco = new PileDecorator();
+		
+		putPileDeco.setFacing(Facing.UP);
+		putPileDeco.setPlacement(PileDecorator.Placement.CENTER_OFFSET_RIGHT);
+		takePileDeco.setFacing(Facing.DOWN);
+		takePileDeco.setPlacement(PileDecorator.Placement.CENTER_OFFSET_LEFT);
+		
+		boardDeco.addPileDecorator(putPileDeco);
+		boardDeco.addPileDecorator(takePileDeco);
 		
 		PlayerDecorator player1Deco = new PlayerDecorator();
 		player1Deco.setPlacement(PlayerDecorator.Placement.BOTTOM);
-		player1Deco.setSorting(Sorting.BYPOINTVALUE);
+		player1Deco.setSorting(Sorting.BYSUITANDTHENSORTINGVALUE);
+		putPileDeco.setFacing(Facing.UP);
 		
 		PlayerDecorator player2Deco = new PlayerDecorator();
 		player2Deco.setPlacement(PlayerDecorator.Placement.TOP);
@@ -132,13 +131,14 @@ public class RuleEngineOlsen implements IRuleEngine {
 		
 		_boardDeco = boardDeco;
 	}
+	
 	@Override
 	public BoardDecorator getBoardDecorator() {	
 		if (_boardDeco == null) initializeBoardDecorator();
 		return _boardDeco;
 	}
 	
-	private int moveCount = 0;
+	private int _moveCount = 0;
 	/**
 	 *  Parts for actual r�vhul rules
 	 */
@@ -152,34 +152,14 @@ public class RuleEngineOlsen implements IRuleEngine {
 		Hand myHand = _myPlayer.getHand();
 		
 		MoveHistory lastMove = getGameState().getBoard().getPile(0).getLastMove();
-		// Check if first move and check if three of clubs is selected
-		if (moveCount == 0) {
-			if (myHand.getSelectedCards().size() > 0) {
-				boolean found = false;
-				for (Card aCard : myHand.getSelectedCards()) {
-					if (aCard.getSuit() == Suit.CLUB && aCard.getValue() == Value.THREE) {
-						found = true;
-						break;
-					}
-				}
-				if (!found && !(card.getSuit() == Suit.CLUB && card.getValue() == Value.THREE)) {
-					return false;
-				}
-				if ((card.getSuit() == Suit.CLUB && card.getValue() == Value.THREE) && card.isSelected()) {
-					return false;
-				}
-			} else {
-				if (!(card.getSuit() == Suit.CLUB && card.getValue() == Value.THREE)) {
-					return false;
-				}
-			}
-		}
 		
 		// IF TABLE IS NOT EMPTY
 		if (lastMove != null && lastMove.getCardCount() > 0) {
-			int movePointValue = lastMove.getCards().get(0).getPointValue();
-			// If your card is less than table IGNORE
-			if (card.getPointValue() < movePointValue) {
+			Card lastCard = lastMove.getCards().get(0);
+			
+			//int movePointValue = lastMove.getCards().get(0).getPointValue();
+			// If your card is less than table, or if the suit is different IGNORE
+			if (card.getPointValue() < lastCard.getPointValue() || card.getSuit() != lastCard.getSuit()) {
 				return false;
 			}
 			
@@ -261,7 +241,7 @@ public class RuleEngineOlsen implements IRuleEngine {
 			card.setSelected(false);
 		}
 		
-		moveCount++;
+		_moveCount++;
 		
 		//Thread.sleep(5000);
 		// Check if the player cleans the table 
@@ -294,7 +274,7 @@ public class RuleEngineOlsen implements IRuleEngine {
 		if (!_turn.equals(player))
 			return false;
 		
-		if (moveCount != 0) {
+		if (_moveCount != 0) {
 			nextTurn(player);
 			for (Card card : player.getHand().getSelectedCards()) {
 				card.setSelected(false);
@@ -343,6 +323,10 @@ public class RuleEngineOlsen implements IRuleEngine {
  	private int calcCardPointValue(Card card) {
 		// TODO: Load this from XML
 		switch (card.getValue()) {
+			case ACE:
+				return 11;
+			case TWO:
+				return 12;		
 			case THREE:
 				return 1;
 			case FOUR:
@@ -363,10 +347,7 @@ public class RuleEngineOlsen implements IRuleEngine {
 				return 9;
 			case KING:
 				return 10;
-			case ACE:
-				return 11;
-			case TWO:
-				return 12;
+
 			case TEN:
 			case JOKER:
 				return 13;
@@ -375,16 +356,13 @@ public class RuleEngineOlsen implements IRuleEngine {
 		}
 	}
 	private void calcStarter() {
-		moveCount = 0;
-		for (Player player : getGameState().getBoard().getPlayers()) {
-			for (Card card : player.getHand().getCards()) {
-				if (card.getSuit() == Suit.CLUB && card.getValue() == Value.THREE) {
-					_turn = player;
-					_turn.setMyTurn(true);
-					return;
-				}
-			}
-		}
+		_moveCount = 0;
+		ArrayList<Player> players = getGameState().getBoard().getPlayers();
+		Random generator = new Random(System.currentTimeMillis());
+		int playerNo = generator.nextInt(players.size());
+		Player player = players.get(playerNo);
+		_turn = player;
+		_turn.setMyTurn(true);
 	}
 	@Override
 	public void receiveGameState(Player myPlayer, GameState gameState) {

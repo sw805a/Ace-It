@@ -41,10 +41,10 @@ public class RuleEngineOlsen implements IRuleEngine {
 	
 	private void initializePiles() {
 		Pile putPile = new Pile();
-		Pile getPile = new Pile();
+		Pile takePile = new Pile();
 		ArrayList<Pile> piles = new ArrayList<Pile>();
 		piles.add(putPile);
-		piles.add(getPile);
+		piles.add(takePile);
 		getGameState().getBoard().setPiles(piles);
 	}
 	
@@ -162,7 +162,6 @@ public class RuleEngineOlsen implements IRuleEngine {
 			if (card.getPointValue() < lastCard.getPointValue() || card.getSuit() != lastCard.getSuit()) {
 				return false;
 			}
-			
 			
 			// Check if you already has selected other card
 			if (myHand.getSelectedCards().size() > 0) {

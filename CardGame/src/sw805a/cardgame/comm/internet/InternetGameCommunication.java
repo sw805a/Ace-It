@@ -52,11 +52,11 @@ public class InternetGameCommunication extends AGameCommunication {
 	public void leaveLobby() {
 		if (_acceptThread != null) {
 			_acceptThread.cancel();
-			//_acceptThread = null;
+			_acceptThread = null;
         }
 		if (_lobbyThread != null) {
 			_lobbyThread.cancel();
-			//_lobbyThread = null;
+			_lobbyThread = null;
 		}
 	}
 

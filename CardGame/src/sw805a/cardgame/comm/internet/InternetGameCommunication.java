@@ -11,10 +11,14 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
 
+import sw805a.cardgame.ApplicationController;
 import sw805a.cardgame.comm.AGameCommunication;
 import sw805a.cardgame.comm.Client;
 import sw805a.cardgame.comm.internet.messages.LobbyUpdate;
@@ -404,7 +408,8 @@ public class InternetGameCommunication extends AGameCommunication {
 		Socket mSocket;
 		public void run() {
 			try {
-				mSocket = new Socket("172.25.18.139",21000);
+				SharedPreferences prefs = ApplicationController.getContext().getSharedPreferences("CardGame", 0);
+				mSocket = new Socket(prefs.getString("ip", "nobelnet.dk"),8002);
 				InputStream inStream = mSocket.getInputStream();
 				while (true) {
 					StringBuilder msg = new StringBuilder();

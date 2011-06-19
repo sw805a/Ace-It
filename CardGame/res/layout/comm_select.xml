@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+    <TextView android:layout_height="wrap_content" android:id="@+id/logo" android:text="Ace It" android:layout_width="fill_parent" android:layout_marginTop="10dip" android:layout_marginBottom="20dip" android:layout_gravity="center_horizontal" android:textSize="36dip" android:gravity="center_horizontal"></TextView>
+    <Button android:id="@+id/bluetooth" android:layout_height="wrap_content" android:text="Bluetooth" android:layout_width="fill_parent" android:layout_gravity="center_horizontal" android:layout_marginLeft="40dip" android:layout_marginRight="40dip"></Button>
+    <Button android:id="@+id/internet" android:layout_height="wrap_content" android:text="Internet" android:layout_width="fill_parent" android:layout_gravity="center_horizontal" android:layout_marginLeft="40dip" android:layout_marginRight="40dip"></Button>
+    <Button android:id="@+id/settings" android:layout_height="wrap_content" android:text="Settings" android:layout_width="fill_parent" android:layout_gravity="center_horizontal" android:layout_marginLeft="40dip" android:layout_marginRight="40dip" android:layout_marginTop="10dip"></Button>
+</LinearLayout>

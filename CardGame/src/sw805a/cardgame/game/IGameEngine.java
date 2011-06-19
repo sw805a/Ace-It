@@ -38,7 +38,7 @@ public interface IGameEngine {
 	void hardReset();
 	
 	
-	RuleEngine getRuleEngine();
+	IRuleEngine getRuleEngine();
 	void selectCard(Card card);
 	void makeMove();
 

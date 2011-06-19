@@ -27,7 +27,7 @@ import sw805a.cardgame.game.models.Player;
 
 public class GameEngine implements IGameEngine {
 	private static GameEngine _instance = new GameEngine();
-	private static RuleEngine _ruleEngine;
+	private static IRuleEngine _ruleEngine;
 	public static IGameEngine getInstance(){
 		return _instance;
 	}
@@ -168,7 +168,7 @@ public class GameEngine implements IGameEngine {
 	}
 	
 	@Override
-	public RuleEngine getRuleEngine() {
+	public IRuleEngine getRuleEngine() {
 		return _ruleEngine;
 	}
 
@@ -275,12 +275,14 @@ public class GameEngine implements IGameEngine {
 	}
 	@Override
 	public String[] getAvailableGames() {
-		return new String[] { "President" };
+		return new String[] { "President", "Olsen" };
 	}
 	@Override
 	public void selectGame(String gameName) {
 		if (gameName.equals("President")) {
 			_ruleEngine = new RuleEngine();
+		} else if(gameName.equals("Olsen")){
+			_ruleEngine = new RuleEngineOlsen();
 		}
 	}
 

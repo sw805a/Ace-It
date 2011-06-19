@@ -11,6 +11,7 @@ public class InitializeView extends ABaseActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.initialize_view);
         
         MediaPlayer mp = MediaPlayer.create(this, R.raw.jingle);
@@ -24,7 +25,6 @@ public class InitializeView extends ABaseActivity {
 			}
 		});
         mp.start();
-        
 	}
 
 }

@@ -22,14 +22,6 @@ import sw805a.cardgame.ui.decorators.PlayerDecorator;
 import sw805a.cardgame.ui.decorators.HandDecorator.Sorting;
 
 public class RuleEngine implements IRuleEngine {
-	private static RuleEngine _instance = null;
-	public static RuleEngine getInstance() {
-		if (_instance == null) {
-			_instance = new RuleEngine();
-		}
-		return _instance;
-	}
-	private RuleEngine(){};
 	
 	private GameState _gameState = new GameState();
 	private Player _turn;

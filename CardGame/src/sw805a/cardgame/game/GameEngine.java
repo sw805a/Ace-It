@@ -1,5 +1,6 @@
 package sw805a.cardgame.game;
 
+import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +9,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import sw805a.cardgame.comm.Client;
+import sw805a.cardgame.comm.CommunicationType;
 import sw805a.cardgame.comm.IGameCommunication;
+import sw805a.cardgame.comm.bluetooth.BluetoothGameCommunication;
 import sw805a.cardgame.comm.internet.InternetGameCommunication;
 import sw805a.cardgame.comm.listeners.OnMessageListener;
 import sw805a.cardgame.comm.listeners.OnPlayerConnectedListener;
@@ -24,6 +27,7 @@ import sw805a.cardgame.game.models.Player;
 
 public class GameEngine implements IGameEngine {
 	private static GameEngine _instance = new GameEngine();
+	private static RuleEngine _ruleEngine;
 	public static IGameEngine getInstance(){
 		return _instance;
 	}
@@ -34,8 +38,19 @@ public class GameEngine implements IGameEngine {
 	private boolean _isHost = false;
 	
 	private GameEngine() {
-		//_communicator = new BluetoothGameCommunication();
-		_communicator = new InternetGameCommunication();
+		
+	} 
+	@Override
+	public void setCommunicationType(CommunicationType type) {
+		switch (type) {
+			case BLUETOOTH:
+				_communicator = new BluetoothGameCommunication();	
+				break;
+		
+			case INTERNET:
+				_communicator = new InternetGameCommunication();
+				break;
+		}
 		_communicator.addOnPlayerConnected(new OnPlayerConnectedListener() {	
 			@Override
 			public void onConnect(Client client) {
@@ -45,7 +60,7 @@ public class GameEngine implements IGameEngine {
 				}
 			}
 		});
-	} 
+	}
 	
 	@Override
 	public void answerInvite(boolean answer) {
@@ -135,7 +150,7 @@ public class GameEngine implements IGameEngine {
 
 	@Override
 	public void selectCard(Card card) {	
-		RuleEngine.getInstance().selectCard(card);
+		getRuleEngine().selectCard(card);
 	}
 
 
@@ -154,7 +169,7 @@ public class GameEngine implements IGameEngine {
 	
 	@Override
 	public RuleEngine getRuleEngine() {
-		return RuleEngine.getInstance();
+		return _ruleEngine;
 	}
 
 	private GameState _syncedGameState;
@@ -258,4 +273,15 @@ public class GameEngine implements IGameEngine {
 			}
 		});
 	}
+	@Override
+	public String[] getAvailableGames() {
+		return new String[] { "President" };
+	}
+	@Override
+	public void selectGame(String gameName) {
+		if (gameName.equals("President")) {
+			_ruleEngine = new RuleEngine();
+		}
+	}
+
 }

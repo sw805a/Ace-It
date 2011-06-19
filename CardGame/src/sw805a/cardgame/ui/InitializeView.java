@@ -13,7 +13,7 @@ public class InitializeView extends ABaseActivity {
         
         getGameEngine().hardReset();
         
-        startActivity(new Intent(this, LobbyView.class));
+        startActivity(new Intent(this, CommunicationSelectView.class));
         finish();
 	}
 

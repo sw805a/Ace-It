@@ -45,8 +45,8 @@ public class CommunicationSelectView extends ABaseActivity {
 			public void onClick(View v) {
 				AlertDialog.Builder alert = new AlertDialog.Builder(CommunicationSelectView.this);
 
-				alert.setTitle("Title");
-				alert.setMessage("Message");
+				alert.setTitle("Internet Lobby");
+				alert.setMessage("Enter Lobby Address");
 
 				// Set an EditText view to get user input 
 				final EditText input = new EditText(CommunicationSelectView.this);

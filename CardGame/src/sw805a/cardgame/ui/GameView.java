@@ -45,7 +45,7 @@ public class GameView extends BaseGameActivity {
 	public Engine onLoadEngine() {
 		GestureEngine.getInstance().clearGestureListeners();
 		_camera = new Camera(-15, 0, BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT);
-		final Engine engine = new Engine(new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT), this._camera));		
+		final Engine engine = new Engine(new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT), this._camera).setNeedsSound(true));		
 		return engine;
 	}
 
@@ -77,8 +77,8 @@ public class GameView extends BaseGameActivity {
 		SoundFactory.setAssetBasePath("mfx/");
 		
 		try {
-			_shuffle = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "shuffle");
-			_throw = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "throw_card");
+			_shuffle = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "shuffling-cards-1.wav");
+			_throw = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "throw_card.wav");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

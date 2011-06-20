@@ -117,7 +117,7 @@ public class GameView extends BaseGameActivity {
 		}
 		scene.setTouchAreaBindingEnabled(true);
 
-		
+		_shuffle.play();
 		return scene;
 	}
 
@@ -129,17 +129,11 @@ public class GameView extends BaseGameActivity {
 					boolean moved = GameEngine.getInstance().makeMove();
 					if(moved){
 						_throw.play();
-						/*MediaPlayer mp = MediaPlayer.create(GameView.this, R.raw.throw_card);
-				        mp.start();*/
 					}
 				}
 			}
 		});
 		_shuffle.play();
-		
-		/*MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
-		mp.start();*/
-		
 	}
 
 	@Override

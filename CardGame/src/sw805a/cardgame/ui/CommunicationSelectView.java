@@ -3,6 +3,7 @@ package sw805a.cardgame.ui;
 import sw805a.cardgame.ApplicationController;
 import sw805a.cardgame.R;
 import sw805a.cardgame.comm.CommunicationType;
+import sw805a.cardgame.game.GameEngine;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +21,8 @@ public class CommunicationSelectView extends ABaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.comm_select);
+        
+        GameEngine.getInstance().hardReset();
         
         Button bluetooth = (Button)findViewById(R.id.bluetooth);
         bluetooth.setOnClickListener(new OnClickListener() {

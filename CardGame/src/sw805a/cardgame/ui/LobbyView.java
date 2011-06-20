@@ -39,7 +39,7 @@ public class LobbyView extends ABaseActivity {
 	
     private ListView _clientList;
         
-    private static ArrayList<ClientListItem> _discoveredClients = null;
+    private ArrayList<ClientListItem> _discoveredClients = null;
     private ClientAdapter _clientAdapter;
     
 

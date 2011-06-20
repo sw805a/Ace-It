@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">CardGame</string>
+    <string name="app_name">Ace It</string>
     <string name="loading_text">The game is loading..</string>
     <string name="LobbyTitle">Lobby</string>
     <string name="LobbyInvite">Invite checked players</string>

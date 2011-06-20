@@ -352,7 +352,9 @@ public class BluetoothGameCommunication extends AGameCommunication {
         @SuppressWarnings("unused")
 		public void cancel() {
             try {
-                _socket.close();
+            	if(_socket != null){
+            		_socket.close();
+            	}
             } catch (IOException e) {
             	
             	return;
@@ -442,13 +444,16 @@ public class BluetoothGameCommunication extends AGameCommunication {
         @SuppressWarnings("unused")
 		public void cancel() {
         	try {
-        	_serverSocket.close();
+        		if(_serverSocket != null){
+        			_serverSocket.close();
+        		}
         	} catch (IOException e) {
         		Logger.Log("ConnectThread close() socket failed: "+e.getMessage());
         	}
             try {
-            	
-                _socket.close();
+            	if(_socket != null){
+            		_socket.close();
+            	}
             } catch (IOException e) {
                 Logger.Log("ConnectThread close() socket failed: "+e.getMessage());
             }

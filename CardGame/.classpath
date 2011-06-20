@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry excluding="sw805a/cardgame/comm/bluetooth/ABluetoothConnect.java|sw805a/cardgame/test/|sw805a/cardgame/comm/CopyOfPlayerCommunication.java|sw805a/cardgame/rule/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="libs/andengine.jar"/>
-	<classpathentry kind="lib" path="libs/andenginemultitouchextension.jar"/>
-	<classpathentry kind="lib" path="libs/flexjson-2.1.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="lib" path="libs/andengine.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/andenginemultitouchextension.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/flexjson-2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

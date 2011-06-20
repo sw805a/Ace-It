@@ -15,6 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".ui.CommunicationSelectView" android:label="@string/app_name">
+        	
+        </activity>
+        <activity android:name=".ui.GameSelectView" android:label="@string/app_name">
+        	
+        </activity>
+        
         <activity android:name=".ui.WaitingForPlayersView" android:label="@string/app_name">
         </activity>
         <activity android:name=".ui.LobbyView" android:label="@string/app_name">

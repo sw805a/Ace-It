@@ -294,6 +294,17 @@ public class HandDecorator {
 					}
 				});
 				break;
+			case BYSUITANDTHENSORTINGVALUE:
+				Collections.sort(_cards, new Comparator<Card>() {
+					@Override
+					public int compare(Card card1, Card card2) {
+						int card1Suit = card1.getSuit().ordinal();
+						int card2Suit = card2.getSuit().ordinal();
+						
+						return ((card2.getSortingValue()+card2Suit) - (card1.getSortingValue()+card1Suit));
+					}
+				});
+				break;
 			case BYPOINTVALUE:
 				Collections.sort(_cards, new Comparator<Card>() {
 					@Override

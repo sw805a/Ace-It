@@ -133,7 +133,16 @@ public class GameView extends BaseGameActivity {
 				}
 			}
 		});
-		_shuffle.play();
+		
+		// Love vibrator
+		GameEngine.getInstance().getRuleEngine().getGameState().getBoard().getPlayer(0).addObserver(new Observer() {
+			@Override
+			public void update(Observable observable, Object data) {
+				if(GameEngine.getInstance().getRuleEngine().getGameState().getBoard().getPlayer(0).getMyTurn()) {
+					mEngine.vibrate(300);
+				}
+			}
+		});
 	}
 
 	@Override

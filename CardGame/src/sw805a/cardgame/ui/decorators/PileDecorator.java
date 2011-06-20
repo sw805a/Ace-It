@@ -18,6 +18,8 @@ public class PileDecorator {
 		TOP_RIGHTCENTER,
 		TOP_RIGHT,
 		CENTER,
+		CENTER_OFFSET_RIGHT,
+		CENTER_OFFSET_LEFT,
 		BOTTOM_LEFT,
 		BOTTOM_LEFTCENTER,
 		BOTTOM_RIGHTCENTER,
@@ -145,6 +147,16 @@ public class PileDecorator {
 				y = BoardDecorator.BOARD_HEIGHT / 2;
 				break;
 	
+			case CENTER_OFFSET_LEFT:
+				x = BoardDecorator.BOARD_WIDTH / 2 - BoardDecorator.CARD_WIDTH;
+				y = BoardDecorator.BOARD_HEIGHT / 2;
+				break;
+				
+			case CENTER_OFFSET_RIGHT:
+				x = BoardDecorator.BOARD_WIDTH / 2 + BoardDecorator.CARD_WIDTH;
+				y = BoardDecorator.BOARD_HEIGHT / 2;
+				break;
+				
 			default:
 				Logger.Log("DECORATOR", "Pile placement not yet implemented: " + getPlacement());
 				return;

@@ -20,6 +20,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -45,7 +46,7 @@ public class GameView extends BaseGameActivity {
 	public Engine onLoadEngine() {
 		GestureEngine.getInstance().clearGestureListeners();
 		_camera = new Camera(-15, 0, BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT);
-		final Engine engine = new Engine(new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT), this._camera).setNeedsSound(true));		
+		final Engine engine = new Engine(new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT), this._camera).setNeedsSound(true));
 		return engine;
 	}
 
@@ -71,6 +72,8 @@ public class GameView extends BaseGameActivity {
 		mEngine.getTextureManager().loadTexture(texture);
 		mEngine.getFontManager().loadFont(_blackFont);
 		mEngine.getFontManager().loadFont(_whiteFont);
+
+		mEngine.enableVibrator(this);
 		
 		_viewEngine = new ViewEngine(this, mEngine, _cardTotextureRegionMap, _backTextureRegion, _blackFont, _whiteFont);
 		
@@ -139,7 +142,13 @@ public class GameView extends BaseGameActivity {
 			@Override
 			public void update(Observable observable, Object data) {
 				if(GameEngine.getInstance().getRuleEngine().getGameState().getBoard().getPlayer(0).getMyTurn()) {
-					mEngine.vibrate(300);
+					runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							mEngine.vibrate(300);
+							
+						}});
 				}
 			}
 		});

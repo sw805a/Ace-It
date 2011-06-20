@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -119,7 +121,7 @@ public class LobbyView extends ABaseActivity {
 			public void OnMessage(Client sender, Object message) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(LobbyView.this);
 				builder.setTitle(R.string.InvitationTitle);
-				builder.setMessage(String.format(getResources().getString(R.string.InvitationText), sender.getName(), "Røvhul"));
+				builder.setMessage(String.format(getResources().getString(R.string.InvitationText), sender.getName(), "Rï¿½vhul"));
 				builder.setCancelable(false);
 				builder.setPositiveButton(getResources().getString(R.string.Accept), new DialogInterface.OnClickListener() {
 					

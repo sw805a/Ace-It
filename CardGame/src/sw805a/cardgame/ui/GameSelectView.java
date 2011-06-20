@@ -5,6 +5,8 @@ import sw805a.cardgame.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,7 @@ public class GameSelectView extends ABaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.game_select);
+
         
         String[] games = getGameEngine().getAvailableGames();
         

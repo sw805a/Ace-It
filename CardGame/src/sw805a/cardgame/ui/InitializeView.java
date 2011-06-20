@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class InitializeView extends ABaseActivity {
 
@@ -13,6 +15,7 @@ public class InitializeView extends ABaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.initialize_view);
+        
         
         MediaPlayer mp = MediaPlayer.create(this, R.raw.jingle);
         mp.setOnCompletionListener(new OnCompletionListener() {

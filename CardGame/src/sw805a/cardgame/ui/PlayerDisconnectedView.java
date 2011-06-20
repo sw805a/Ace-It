@@ -4,6 +4,8 @@ import sw805a.cardgame.R;
 import sw805a.cardgame.comm.Client;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
@@ -13,6 +15,7 @@ public class PlayerDisconnectedView extends ABaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_disconnected);
+        
         
         TextView player = (TextView)findViewById(R.id.playerDisconnectedName);
         

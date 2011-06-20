@@ -145,6 +145,9 @@ public class GameEngine implements IGameEngine {
 
 	@Override
 	public void hardReset() {
+		if(_communicator != null){
+			_communicator.leaveLobby();
+		}
 		_instance = new GameEngine();
 		
 	}

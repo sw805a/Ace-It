@@ -1,9 +1,12 @@
 package sw805a.cardgame.ui;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.anddev.andengine.audio.sound.Sound;
+import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -37,6 +40,8 @@ public class GameView extends BaseGameActivity {
 	private TextureRegion _backTextureRegion;
 	private Font _blackFont,_whiteFont;
 
+	private Sound _shuffle, _throw;
+	
 	public Engine onLoadEngine() {
 		GestureEngine.getInstance().clearGestureListeners();
 		_camera = new Camera(-15, 0, BoardDecorator.BOARD_WIDTH, BoardDecorator.BOARD_HEIGHT);
@@ -68,6 +73,20 @@ public class GameView extends BaseGameActivity {
 		mEngine.getFontManager().loadFont(_whiteFont);
 		
 		_viewEngine = new ViewEngine(this, mEngine, _cardTotextureRegionMap, _backTextureRegion, _blackFont, _whiteFont);
+		
+		SoundFactory.setAssetBasePath("mfx/");
+		
+		try {
+			_shuffle = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "shuffle");
+			_throw = SoundFactory.createSoundFromAsset(this.mEngine.getSoundManager(), this, "throw_card");
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void addCard(Texture texture,Card card) {
@@ -109,16 +128,17 @@ public class GameView extends BaseGameActivity {
 				if(id == "flick"){
 					boolean moved = GameEngine.getInstance().makeMove();
 					if(moved){
-						MediaPlayer mp = MediaPlayer.create(GameView.this, R.raw.throw_card);
-				        mp.start();
+						_throw.play();
+						/*MediaPlayer mp = MediaPlayer.create(GameView.this, R.raw.throw_card);
+				        mp.start();*/
 					}
 				}
 			}
 		});
+		_shuffle.play();
 		
-		
-		MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
-		mp.start();
+		/*MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
+		mp.start();*/
 		
 	}
 

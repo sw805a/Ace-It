@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import android.media.MediaPlayer;
+
+import sw805a.cardgame.R;
 import sw805a.cardgame.comm.Client;
 import sw805a.cardgame.comm.CommunicationType;
 import sw805a.cardgame.comm.IGameCommunication;
@@ -155,11 +158,13 @@ public class GameEngine implements IGameEngine {
 
 
 	@Override
-	public void makeMove() {
+	public boolean makeMove() {
 		Move move = getRuleEngine().makeMove();
 		if (move != null) {
 			_communicator.sendMessage(move);
+			return true;
 		}
+		return false;
 	}
 
 	@Override

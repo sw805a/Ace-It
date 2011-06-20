@@ -40,7 +40,7 @@ public interface IGameEngine {
 	
 	IRuleEngine getRuleEngine();
 	void selectCard(Card card);
-	void makeMove();
+	boolean makeMove();
 
 	void makePass();
 }

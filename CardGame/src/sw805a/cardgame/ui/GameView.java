@@ -19,8 +19,10 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.view.KeyEvent;
 
+import sw805a.cardgame.R;
 import sw805a.cardgame.game.GameEngine;
 import sw805a.cardgame.game.IGameEngine;
 import sw805a.cardgame.game.models.*;
@@ -105,10 +107,19 @@ public class GameView extends BaseGameActivity {
 			@Override
 			public void onGesture(String id) {
 				if(id == "flick"){
-					GameEngine.getInstance().makeMove();
+					boolean moved = GameEngine.getInstance().makeMove();
+					if(moved){
+						MediaPlayer mp = MediaPlayer.create(GameView.this, R.raw.throw_card);
+				        mp.start();
+					}
 				}
 			}
 		});
+		
+		
+		MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
+		mp.start();
+		
 	}
 
 	@Override

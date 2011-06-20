@@ -7,6 +7,7 @@ import sw805a.cardgame.R;
 import sw805a.cardgame.comm.Client;
 import sw805a.cardgame.comm.listeners.OnPlayerDisconnectedListener;
 import sw805a.cardgame.domain.SyncDone;
+import sw805a.cardgame.game.GameEngine;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ public class LoadingView extends ABaseActivity {
         SyncDone.getInstance().addObserver(new Observer() {
 			@Override
 			public void update(Observable observable, Object data) {
+				getGameEngine().getCommunicator().leaveLobby();
 				startActivity(new Intent(LoadingView.this, GameView.class));
 				finish();
 			}

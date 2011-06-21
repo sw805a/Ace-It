@@ -24,6 +24,13 @@ public class LobbyAcceptThread extends Thread {
 		mServerSocket = new ServerSocket(CardGameServer.LobbyPort);
 	}
 	
+	public void reset() {
+		for (LobbyReadThread t : mReadThreads) {
+			t.close();
+		}
+		mReadThreads.clear();
+	}
+	
 	public void run() {
 		while (mRun) {
 			try {

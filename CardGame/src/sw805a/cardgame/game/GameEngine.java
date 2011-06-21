@@ -283,7 +283,7 @@ public class GameEngine implements IGameEngine {
 	}
 	@Override
 	public String[] getAvailableGames() {
-		return new String[] { "President", "Olsen" };
+		return new String[] { "President" };
 	}
 	@Override
 	public void selectGame(String gameName) {

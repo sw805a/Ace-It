@@ -8,7 +8,16 @@ public class CardGameServer {
 			LobbyAcceptThread lobby = new LobbyAcceptThread();
 			lobby.start();
 			System.out.println("Running server on port " + LobbyPort);
-			System.in.read();
+			do {
+				int a = System.in.read();
+				if (a == 'q') {
+					break;
+				}
+				if (a == 'r') {
+					lobby.reset();
+					System.out.println("Reset!");
+				}
+			} while (true);
 			lobby.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

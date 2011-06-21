@@ -124,7 +124,7 @@ public class LobbyView extends ABaseActivity {
 			public void OnMessage(Client sender, Object message) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(LobbyView.this);
 				builder.setTitle(R.string.InvitationTitle);
-				builder.setMessage(String.format(getResources().getString(R.string.InvitationText), sender.getName(), "R�vhul"));
+				builder.setMessage(String.format(getResources().getString(R.string.InvitationText), sender.getName(), "President"));
 				builder.setCancelable(false);
 				builder.setPositiveButton(getResources().getString(R.string.Accept), new DialogInterface.OnClickListener() {
 					
